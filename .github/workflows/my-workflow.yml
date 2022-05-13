@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       issues: write
+      repository-projects: write
     steps:
     - uses: actions/github-script@0.8.0
       with:
@@ -19,4 +20,9 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             body: "🎉 You've created this issue comment using GitHub Script!!!"
+          });
+          github.projects.createCard({
+            column_id: 18692592,
+            content_id: context.payload.issue.id,
+            content_type: "Issue"
           });
